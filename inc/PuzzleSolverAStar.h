@@ -8,8 +8,8 @@
 #ifndef INC_PUZZLESOLVERASTAR_H_
 #define INC_PUZZLESOLVERASTAR_H_
 
-#include <cmath>
 #include "PuzzleSolverBase.h"
+#include <map>
 
 typedef map<int, PuzzlePosition> sortedList;
 typedef pair<int, PuzzlePosition> indexPair;

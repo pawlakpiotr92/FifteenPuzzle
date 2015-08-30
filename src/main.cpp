@@ -13,10 +13,18 @@ int main(int argc, char* argv[])
 //  PuzzleSolverDfs solver(defaultPuzzle);
 
   PuzzleGenerator gen;
-  PuzzlePosition abc = gen.generatePuzzle(5);
+  PuzzlePosition abc = gen.generatePuzzle(8);
   //cout << endl << endl << endl;
   //PuzzleSolverAStar solver(abc.getPuzzle());
-  PuzzleSolverAStar solver(defaultPuzzle);
+  {
+    PuzzleSolverBfs solver(abc.getPuzzle());
+  }
+  {
+    PuzzleSolverDfs solver(abc.getPuzzle());
+  }
+  {
+    PuzzleSolverAStar solver(abc.getPuzzle());
+  }
 
   return 0;
 }

@@ -8,14 +8,11 @@
 #ifndef INC_PUZZLESOLVERBASE_H_
 #define INC_PUZZLESOLVERBASE_H_
 
-#include <iostream>
+#include <algorithm>
 #include <fstream>
 #include <sstream>
-#include <string>
-#include <algorithm>
-#include <map>
-#include <list>
 #include <chrono>
+#include <list>
 
 #include "PuzzlePosition.h"
 
