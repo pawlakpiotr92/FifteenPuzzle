@@ -21,7 +21,7 @@ class PuzzleSolverBfs: public PuzzleSolverBase
   private:
     PuzzleSolverBfs();
     queue<PuzzlePosition> _nodeQueue;
-    int                   _numberOfSteps;
+    unsigned int          _numberOfSteps;
 
     bool addChildNodeToQueue(PuzzlePosition::Direction direction);
 

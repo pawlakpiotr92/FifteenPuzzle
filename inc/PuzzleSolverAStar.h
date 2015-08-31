@@ -23,8 +23,8 @@ class PuzzleSolverAStar : public PuzzleSolverBase
 
   private:
     PuzzleSolverAStar();
-    sortedList _nodeSortedList;
-    int        _numberOfSteps;
+    sortedList   _nodeSortedList;
+    unsigned int _numberOfSteps;
 
     virtual void runAlgorithm();
     virtual void addToContainer(const PuzzlePosition& position);

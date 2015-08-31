@@ -18,7 +18,7 @@ PuzzleGenerator::generatePuzzle(unsigned int amountOfSteps)
 {
   PuzzlePosition puzzle;
   list<PuzzlePosition> movesList(1, puzzle);
-  int i = 0;
+  unsigned int i = 0;
 
   while (i < amountOfSteps)
   {

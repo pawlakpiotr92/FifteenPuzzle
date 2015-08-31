@@ -41,7 +41,7 @@ class PuzzleSolverBase
     timePoint            _clkStart;
     timePoint            _clkStop;
     Puzzle               _startPuzzle;
-    int                  _maxNumberOfSteps;
+    unsigned int         _maxNumberOfSteps;
 
     inline microseconds calculateExecutionTime()
     {
