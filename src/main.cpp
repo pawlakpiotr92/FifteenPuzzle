@@ -9,24 +9,7 @@
 
 int main(int argc, char* argv[])
 {
-//  parseCommandLineArguments(argc, argv);
-//  PuzzleSolverDfs solver(defaultPuzzle);
-
-//  PuzzleGenerator gen;
-//  PuzzlePosition abc = gen.generatePuzzle(8);
-//  //cout << endl << endl << endl;
-//  //PuzzleSolverAStar solver(abc.getPuzzle());
-//  {
-//    PuzzleSolverBfs solver(abc.getPuzzle());
-//  }
-//  {
-//    PuzzleSolverDfs solver(abc.getPuzzle());
-//  }
-//  {
-//    PuzzleSolverAStar solver(abc.getPuzzle());
-//  }
-  
-  performSearchAlgorithms();
+  parseCommandLineArguments(argc, argv);
 
   return 0;
 }
@@ -35,7 +18,7 @@ void parseCommandLineArguments(int argc, char* argv[])
 {
   if (argc == 2)
   {
-    if ((string) argv[1] == "-h")
+    if ((string) argv[1] == "-h" || (string) argv[1] == "--help")
     {
       helpPrintout(argv);
     }
@@ -45,23 +28,65 @@ void parseCommandLineArguments(int argc, char* argv[])
       helpPrintout(argv);
     }
   }
-  else if (argc == 3)
+  else if (argc == 3 || argc == 4)
   {
     try
     {
-      if ((string) argv[1] == "-dfs")
+      if ((string) argv[1] == "--dfs")
       {
         PuzzleSolverDfs solver((string) argv[2]);
       }
 
-      else if ((string) argv[1] == "-bfs")
+      else if ((string) argv[1] == "--bfs")
       {
         PuzzleSolverBfs solver((string) argv[2]);
       }
 
-      else if ((string) argv[1] == "-a*")
+      else if ((string) argv[1] == "--ast")
       {
         PuzzleSolverAStar solver((string) argv[2]);
+      }
+      
+      else if ((string) argv[1] == "--gen" && argc == 4)
+      {
+        try
+        {
+          PuzzleGenerator generator;
+          unsigned int stepAmount = stoi(string(argv[2]));
+          PuzzlePosition puzzle = generator.generatePuzzle(stepAmount);
+          
+          cout << "Generated puzzle:" << endl << puzzle;
+          
+          if ((string) argv[3] == "--dfs")
+          {
+            PuzzleSolverDfs solver(puzzle.getPuzzle());
+          }
+
+          else if ((string) argv[3] == "--bfs")
+          {
+            PuzzleSolverBfs solver(puzzle.getPuzzle());
+          }
+
+          else if ((string) argv[3] == "--ast")
+          {
+            PuzzleSolverAStar solver(puzzle.getPuzzle());
+          }
+          
+          else
+          {
+            ofstream puzzleFile;
+            puzzleFile.exceptions(ofstream::failbit);
+            puzzleFile.open((string) argv[3]);
+            
+            puzzleFile << "4 4" << endl << puzzle;
+            puzzleFile.close();
+          }
+        }
+        catch (invalid_argument e)
+        {
+          cout << "Invalid syntax." << endl;
+          helpPrintout(argv);
+        }
       }
 
       else
@@ -90,24 +115,23 @@ void helpPrintout(char* argv[])
 {
   string execName = argv[0];
   size_t found = execName.find_last_of('/');
-  cout << "Syntax: " << execName.substr(found + 1) << " [-h] | [-dfs|-bfs|-a*] FILE" << endl << endl
+  cout << "Syntax: " << execName.substr(found + 1) << " [-h|--help|--dfs|--bfs|--ast|--gen] [D] [FILE|ALG]" << endl << endl
        << "This application solves fifteen-puzzle game." << endl
        << "Text file with puzzle is given as an argument." << endl
        << "DFS, BFS and A* algorithms can be chosen to solve." << endl
        << endl << "Options:" << endl
-       << "  -h:       \tShow this help." << endl
-       << "  -dfs FILE:\tSolve puzzle from FILE using DFS algorithm." << endl
-       << "  -bfs FILE:\tSolve puzzle from FILE using BFS algorithm." << endl
-       << "  -a*  FILE:\tSolve puzzle from FILE using A*  algorithm." << endl;
+       << "  -h, --help:\tShow this help." << endl
+       << "  --dfs FILE:\tSolve puzzle from FILE using DFS algorithm." << endl
+       << "  --bfs FILE:\tSolve puzzle from FILE using BFS algorithm." << endl
+       << "  --ast FILE:\tSolve puzzle from FILE using A*  algorithm." << endl
+       << "  --gen D FILE:\tGenerate puzzle of depth D and save to FILE." << endl
+       << "  --gen D ALG:\tSolve generated puzzle of depth D using chosen ALGorithm." << endl;
   exit(0);
 }
 
 void performSearchAlgorithms()
 {
   const string pathToPuzzles = "/home/piter/Programowanie/SISE-PHP/sise/puzzles/";
-//  PuzzleAndTimeMap bfsSolutions;
-//  PuzzleAndTimeMap dfsSolutions;
-//  PuzzleAndTimeMap aStarSolutions;
   
   PuzzleAndTimeMapEnh enhanced;
   
@@ -121,22 +145,23 @@ void performSearchAlgorithms()
         fileName << "Deep0" << depth << "_" << setfill('0') << setw(3) << id << ".txt";
         string filePath = pathToPuzzles + fileName.str();
         
-        cout << "Opening " << fileName.str() << "..." << endl;
+        cout << "Opening " << fileName.str() << "... ";
         
         PuzzleSolverBfs bfs(filePath);
-        //bfsSolutions.insert(PuzzleAndTime(fileName, solver->getTimeOfExecution()));
+        cout << "BFS... ";;
         enhanced[fileName.str()][0] = bfs.getTimeOfExecution();
         
         PuzzleSolverDfs dfs(filePath);
-        //dfsSolutions.insert(PuzzleAndTime(fileName, solver->getTimeOfExecution()));
+        cout << "DFS... ";
         enhanced[fileName.str()][1] = dfs.getTimeOfExecution();
         
         PuzzleSolverAStar astar(filePath);
-        //aStarSolutions.insert(PuzzleAndTime(fileName, solver->getTimeOfExecution()));
+        cout << "A*..." << endl;
         enhanced[fileName.str()][2] = astar.getTimeOfExecution();
       }
       catch (ios_base::failure & e)
       {
+        cout << "File not found." << endl;
         break;
       }
     }

@@ -22,7 +22,7 @@ class PuzzleSolverDfs: public PuzzleSolverBase
     PuzzleSolverDfs();
     stack<PuzzlePosition> _nodeStack;
 
-    bool addChildNodeToStack(PuzzlePosition::Direction direction);
+    bool addChildNodeToStack(PuzzlePosition::Direction direction, const PuzzlePosition &oldNode);
 
     virtual void runAlgorithm();
     virtual void addToContainer(const PuzzlePosition& position);

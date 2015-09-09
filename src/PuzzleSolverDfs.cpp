@@ -33,87 +33,75 @@ PuzzleSolverDfs::~PuzzleSolverDfs()
 }
 
 bool
-PuzzleSolverDfs::addChildNodeToStack(PuzzlePosition::Direction direction)
+PuzzleSolverDfs::addChildNodeToStack(PuzzlePosition::Direction direction, const PuzzlePosition &oldNode)
 {
-  PuzzlePosition tmp = _nodeStack.top();
+  PuzzlePosition tmp = oldNode;
   it nodeInHistory = find(_nodeHistory.begin(),
                           _nodeHistory.end(),
-                          tmp);
+                          oldNode);
   tmp.moveZero(direction);
   tmp.setPreviousPosition(nodeInHistory);
 
-  if (tmp != *_nodeStack.top().getPreviousPosition())
+  nodeInHistory = find(_nodeHistory.begin(),
+                       _nodeHistory.end(),
+                       tmp);
+  
+  if (nodeInHistory != _nodeHistory.end() && nodeInHistory->getPreviousPosition() == tmp.getPreviousPosition())
   {
-    nodeInHistory = find(_nodeHistory.begin(),
-                         _nodeHistory.end(),
-                         tmp);
-    if (*nodeInHistory == tmp && nodeInHistory->getPreviousPosition() == tmp.getPreviousPosition())
-    {
-      return false;
-    }
-    else
-    {
-      _nodeStack.push(tmp);
-      _nodeHistory.push_back(tmp);
-      return true;
-    }
+    return false;
   }
-  return false;
+  else
+  {
+    _nodeStack.push(tmp);
+    _nodeHistory.push_back(tmp);
+    return true;
+  }
 }
 
 void
 PuzzleSolverDfs::runAlgorithm()
 {
-  if (_nodeStack.size() > _maxNumberOfSteps)
-  {
-    return;
-  }
-
-  if (_nodeStack.top().isFinalNode())
-  {
-    _clkStop = high_resolution_clock::now();
-    throw true;
-  }
 
   if (_nodeStack.empty())
   {
     throw false;
   }
-
+  
+  if (_nodeStack.top().isFinalNode())
+  {
+    _clkStop = high_resolution_clock::now();
+    throw true;
+  }
+  
+  if (_nodeStack.top().getDepth() > _maxNumberOfSteps)
+  {
+    _nodeStack.pop();
+    runAlgorithm();
+  }
+  
+  PuzzlePosition tmp = _nodeStack.top();
+  _nodeStack.pop();
+  
   int x, y;
-  _nodeStack.top().findZeroPosition(x, y);
-  if (!_nodeStack.top().zeroIsOverUpperEdge(y))
+  tmp.findZeroPosition(x, y);
+  if (!tmp.zeroIsOverUpperEdge(y))
   {
-    if (addChildNodeToStack(PuzzlePosition::Up))
-    {
-      runAlgorithm();
-      _nodeStack.pop();
-    }
+    addChildNodeToStack(PuzzlePosition::Up, tmp);
   }
-  if (!_nodeStack.top().zeroIsOverRightEdge(x))
+  if (!tmp.zeroIsOverRightEdge(x))
   {
-    if (addChildNodeToStack(PuzzlePosition::Right))
-    {
-      runAlgorithm();
-      _nodeStack.pop();
-    }
+    addChildNodeToStack(PuzzlePosition::Right, tmp);
   }
-  if (!_nodeStack.top().zeroIsOverLowerEdge(y))
+  if (!tmp.zeroIsOverLowerEdge(y))
   {
-    if (addChildNodeToStack(PuzzlePosition::Down))
-    {
-      runAlgorithm();
-      _nodeStack.pop();
-    }
+    addChildNodeToStack(PuzzlePosition::Down, tmp);
   }
-  if (!_nodeStack.top().zeroIsOverLeftEdge(x))
+  if (!tmp.zeroIsOverLeftEdge(x))
   {
-    if (addChildNodeToStack(PuzzlePosition::Left))
-    {
-      runAlgorithm();
-      _nodeStack.pop();
-    }
+    addChildNodeToStack(PuzzlePosition::Left, tmp);
   }
+  
+  runAlgorithm();
 }
 
 void

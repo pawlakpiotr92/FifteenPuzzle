@@ -37,6 +37,7 @@ PuzzlePosition::PuzzlePosition(const PuzzlePosition& previousPuzzle) :
     _heuristic(previousPuzzle._heuristic),
     _depth(previousPuzzle._depth)
 {
+  increaseDepth();
 }
 
 PuzzlePosition&

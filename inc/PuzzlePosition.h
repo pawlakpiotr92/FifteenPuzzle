@@ -121,14 +121,14 @@ class PuzzlePosition
       _heuristic = heuristic;
     }
 
-    inline int
+    inline unsigned int
     getDepth() const
     {
       return _depth;
     }
 
     inline void
-    setDepth(const int& depth)
+    setDepth(const unsigned int& depth)
     {
       _depth = depth;
     }
@@ -147,7 +147,7 @@ class PuzzlePosition
     Puzzle _puzzle;
 
     mutable int _heuristic;
-    int _depth;
+    unsigned int _depth;
 
     void moveZeroUp();
     void moveZeroDown();
