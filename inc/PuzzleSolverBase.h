@@ -1,10 +1,3 @@
-/*
- * PuzzleSolver.h
- *
- *  Created on: 10 sie 2015
- *      Author: piter
- */
-
 #ifndef INC_PUZZLESOLVERBASE_H_
 #define INC_PUZZLESOLVERBASE_H_
 

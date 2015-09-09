@@ -1,16 +1,7 @@
-/*
- * PuzzleGenerator.cpp
- *
- *  Created on: 23 sie 2015
- *      Author: piter
- */
-
 #include "../inc/PuzzleGenerator.h"
 
 PuzzleGenerator::PuzzleGenerator()
 {
-  // TODO Auto-generated constructor stub
-
 }
 
 PuzzlePosition
@@ -114,11 +105,6 @@ PuzzleGenerator::generatePuzzle(unsigned int amountOfSteps)
       }
     }
   }
-
-//  for (PuzzlePosition tmp : movesList)
-//  {
-//    cout << tmp << endl;
-//  }
 
   return puzzle;
 }

@@ -1,10 +1,3 @@
-/*
- * PuzzleSolverBase.cpp
- *
- *  Created on: 10 sie 2015
- *      Author: piter
- */
-
 #include "../inc/PuzzleSolverBase.h"
 
 PuzzleSolverBase::PuzzleSolverBase() :

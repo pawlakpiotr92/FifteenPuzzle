@@ -1,10 +1,3 @@
-/*
- * PuzzleSolverAStar.h
- *
- *  Created on: 23 sie 2015
- *      Author: piter
- */
-
 #ifndef INC_PUZZLESOLVERASTAR_H_
 #define INC_PUZZLESOLVERASTAR_H_
 

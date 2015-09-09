@@ -1,10 +1,3 @@
-/*
- * PuzzlePosition.h
- *
- *  Created on: 9 sie 2015
- *      Author: piter
- */
-
 #ifndef PUZZLEPOSITION_H_
 #define PUZZLEPOSITION_H_
 

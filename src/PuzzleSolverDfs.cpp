@@ -1,10 +1,3 @@
-/*
- * PuzzleSolverDfs.cpp
- *
- *  Created on: 16 sie 2015
- *      Author: piter
- */
-
 #include "../inc/PuzzleSolverDfs.h"
 
 PuzzleSolverDfs::PuzzleSolverDfs() :

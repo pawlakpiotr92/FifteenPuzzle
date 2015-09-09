@@ -1,10 +1,3 @@
-/*
- * PuzzleSolverAStar.cpp
- *
- *  Created on: 26 sie 2015
- *      Author: piter
- */
-
 #include "../inc/PuzzleSolverAStar.h"
 
 PuzzleSolverAStar::PuzzleSolverAStar() :

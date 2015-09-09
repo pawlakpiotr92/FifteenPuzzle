@@ -1,10 +1,3 @@
-/*
- * main.h
- *
- *  Created on: 10 sie 2015
- *      Author: piter
- */
-
 #ifndef INC_MAIN_H_
 #define INC_MAIN_H_
 

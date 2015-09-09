@@ -1,10 +1,3 @@
-/*
- * PuzzlePosition.cpp
- *
- *  Created on: 9 sie 2015
- *      Author: piter
- */
-
 #include "../inc/PuzzlePosition.h"
 
 Puzzle PuzzlePosition::puzzleBasicPosition =

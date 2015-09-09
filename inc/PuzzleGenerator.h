@@ -1,10 +1,3 @@
-/*
- * PuzzleGenerator.h
- *
- *  Created on: 23 sie 2015
- *      Author: piter
- */
-
 #ifndef INC_PUZZLEGENERATOR_H_
 #define INC_PUZZLEGENERATOR_H_
 

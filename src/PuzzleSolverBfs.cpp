@@ -1,10 +1,3 @@
-/*
- * PuzzleSolverBfs.cpp
- *
- *  Created on: 16 sie 2015
- *      Author: piter
- */
-
 #include "../inc/PuzzleSolverBfs.h"
 
 PuzzleSolverBfs::PuzzleSolverBfs() :

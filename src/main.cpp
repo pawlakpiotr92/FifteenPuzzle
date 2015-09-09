@@ -1,10 +1,3 @@
-/*
- * main.cpp
- *
- *  Created on: 10 sie 2015
- *      Author: piter
- */
-
 #include "../inc/main.h"
 
 int main(int argc, char* argv[])

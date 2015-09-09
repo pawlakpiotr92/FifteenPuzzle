@@ -1,10 +1,3 @@
-/*
- * PuzzleSolverBfs.h
- *
- *  Created on: 16 sie 2015
- *      Author: piter
- */
-
 #ifndef INC_PUZZLESOLVERBFS_H_
 #define INC_PUZZLESOLVERBFS_H_
 
