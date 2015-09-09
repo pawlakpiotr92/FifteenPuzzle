@@ -69,19 +69,19 @@ PuzzleSolverBase::solvePuzzle()
     if (e == true)
     {
       solutionWasFound = e;
-      cout << "Solution found!\nTime of search: " <<          calculateExecutionTime().count()             << " microseconds, "
-                                                  << (double) calculateExecutionTime().count() / 1000.0    << " miliseconds, "
-                                                  << (double) calculateExecutionTime().count() / 1000000.0 << " seconds." << endl;
-      printOutSolution();
-      cout << "Time of search: "                  <<          calculateExecutionTime().count()             << " microseconds, "
-                                                  << (double) calculateExecutionTime().count() / 1000.0    << " miliseconds, "
-                                                  << (double) calculateExecutionTime().count() / 1000000.0 << " seconds." << endl;
+//      cout << "Solution found!\nTime of search: " <<          calculateExecutionTime().count()             << " microseconds, "
+//                                                  << (double) calculateExecutionTime().count() / 1000.0    << " miliseconds, "
+//                                                  << (double) calculateExecutionTime().count() / 1000000.0 << " seconds." << endl;
+//      printOutSolution();
+//      cout << "Time of search: "                  <<          calculateExecutionTime().count()             << " microseconds, "
+//                                                  << (double) calculateExecutionTime().count() / 1000.0    << " miliseconds, "
+//                                                  << (double) calculateExecutionTime().count() / 1000000.0 << " seconds." << endl;
     }
   }
   if (!solutionWasFound)
   {
-    cout << "Solution not found! Extending maximum depth to " << ++_maxNumberOfSteps << "..." << endl;
-
+    //cout << "Solution not found! Extending maximum depth to " << ++_maxNumberOfSteps << "..." << endl;
+    ++_maxNumberOfSteps;
     _nodeHistory.clear();
     clearContainter();
     solvePuzzle();

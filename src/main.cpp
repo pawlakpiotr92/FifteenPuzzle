@@ -12,19 +12,21 @@ int main(int argc, char* argv[])
 //  parseCommandLineArguments(argc, argv);
 //  PuzzleSolverDfs solver(defaultPuzzle);
 
-  PuzzleGenerator gen;
-  PuzzlePosition abc = gen.generatePuzzle(8);
-  //cout << endl << endl << endl;
-  //PuzzleSolverAStar solver(abc.getPuzzle());
-  {
-    PuzzleSolverBfs solver(abc.getPuzzle());
-  }
-  {
-    PuzzleSolverDfs solver(abc.getPuzzle());
-  }
-  {
-    PuzzleSolverAStar solver(abc.getPuzzle());
-  }
+//  PuzzleGenerator gen;
+//  PuzzlePosition abc = gen.generatePuzzle(8);
+//  //cout << endl << endl << endl;
+//  //PuzzleSolverAStar solver(abc.getPuzzle());
+//  {
+//    PuzzleSolverBfs solver(abc.getPuzzle());
+//  }
+//  {
+//    PuzzleSolverDfs solver(abc.getPuzzle());
+//  }
+//  {
+//    PuzzleSolverAStar solver(abc.getPuzzle());
+//  }
+  
+  performSearchAlgorithms();
 
   return 0;
 }
@@ -98,4 +100,56 @@ void helpPrintout(char* argv[])
        << "  -bfs FILE:\tSolve puzzle from FILE using BFS algorithm." << endl
        << "  -a*  FILE:\tSolve puzzle from FILE using A*  algorithm." << endl;
   exit(0);
+}
+
+void performSearchAlgorithms()
+{
+  const string pathToPuzzles = "/home/piter/Programowanie/SISE-PHP/sise/puzzles/";
+//  PuzzleAndTimeMap bfsSolutions;
+//  PuzzleAndTimeMap dfsSolutions;
+//  PuzzleAndTimeMap aStarSolutions;
+  
+  PuzzleAndTimeMapEnh enhanced;
+  
+  for (int depth = 0; depth < 8; depth++)
+  {
+    for (int id = 1; ; id++)
+    {
+      try
+      {
+        stringstream fileName;
+        fileName << "Deep0" << depth << "_" << setfill('0') << setw(3) << id << ".txt";
+        string filePath = pathToPuzzles + fileName.str();
+        
+        cout << "Opening " << fileName.str() << "..." << endl;
+        
+        PuzzleSolverBfs bfs(filePath);
+        //bfsSolutions.insert(PuzzleAndTime(fileName, solver->getTimeOfExecution()));
+        enhanced[fileName.str()][0] = bfs.getTimeOfExecution();
+        
+        PuzzleSolverDfs dfs(filePath);
+        //dfsSolutions.insert(PuzzleAndTime(fileName, solver->getTimeOfExecution()));
+        enhanced[fileName.str()][1] = dfs.getTimeOfExecution();
+        
+        PuzzleSolverAStar astar(filePath);
+        //aStarSolutions.insert(PuzzleAndTime(fileName, solver->getTimeOfExecution()));
+        enhanced[fileName.str()][2] = astar.getTimeOfExecution();
+      }
+      catch (ios_base::failure & e)
+      {
+        break;
+      }
+    }
+  }
+  
+  ofstream outputFile("outputFile.txt");
+  outputFile << "Puzzle name\tBFS time\tDFS time\tA* time" << endl;
+  for (PuzzleAndTimeEnh pair : enhanced)
+  {
+    outputFile << pair.first << '\t';
+    for (int i = 0; i < 3; i++)
+      outputFile << pair.second[i] << '\t';
+    outputFile << endl;
+  }
+  outputFile.close();
 }

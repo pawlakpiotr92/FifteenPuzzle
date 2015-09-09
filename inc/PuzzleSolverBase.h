@@ -24,12 +24,16 @@ typedef high_resolution_clock::time_point timePoint;
 class PuzzleSolverBase
 {
   public:
+    virtual ~PuzzleSolverBase();
     void parseFileWithPuzzle(const string& filePath);
     void solvePuzzle();
+    inline int getTimeOfExecution()
+    {
+        return calculateExecutionTime().count();
+    }
 
   protected:
     PuzzleSolverBase();
-    virtual ~PuzzleSolverBase();
     explicit PuzzleSolverBase(const Puzzle& startPuzzle);
 
     virtual void runAlgorithm() = 0;

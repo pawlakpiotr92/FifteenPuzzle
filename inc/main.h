@@ -9,6 +9,8 @@
 #define INC_MAIN_H_
 
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 #include "PuzzleGenerator.h"
 #include "PuzzleSolverAStar.h"
@@ -19,6 +21,13 @@ using namespace std;
 
 void parseCommandLineArguments(int argc, char* argv[]);
 void helpPrintout(char* argv[]);
+void performSearchAlgorithms();
+
+typedef pair<const string, int> PuzzleAndTime;
+typedef map <string, int> PuzzleAndTimeMap;
+
+typedef pair<const string, int[3]> PuzzleAndTimeEnh;
+typedef map <string, int[3]> PuzzleAndTimeMapEnh;
 
 Puzzle defaultPuzzle =
 {
